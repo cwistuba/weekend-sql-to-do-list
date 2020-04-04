@@ -10,7 +10,7 @@ function submitItem(event) {
 
   const doItemInput = $("#js-input-doItem").val();
 
-  console.log(doItemInput);
+  postDoItem(doItemInput);
 }
 
 function postDoItem(doItem) {
@@ -20,7 +20,7 @@ function postDoItem(doItem) {
 
   $.ajax({
     type: "POST",
-    url: "/todoitems",
+    url: "/items",
     data: dataForServer,
   });
 }
