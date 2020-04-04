@@ -4,8 +4,9 @@ let items = [];
 
 function init() {
   $("#js-submit-doItem").on("submit", submitItem);
+  $(".js-item-output").on("click", ".js-btn-remove", deleteItem);
 
-  getItems();
+  getItem();
 }
 
 function submitItem(event) {
@@ -13,9 +14,11 @@ function submitItem(event) {
 
   const doItemInput = {
     doItem: $("#js-input-doItem").val(),
+    complete: "n",
   };
 
   postDoItem(doItemInput);
+  clearItem();
 }
 
 function postDoItem(doItem) {
@@ -25,21 +28,36 @@ function postDoItem(doItem) {
     data: doItem,
   })
     .then((response) => {
-      getItems();
+      getItem();
     })
     .catch((err) => {
       console.warn(err);
     });
 }
 
-function getItems() {
+function getItem() {
   $.ajax({
     type: "GET",
     url: "/doItem",
   })
     .then((response) => {
       items = response;
-      renderItem(items);
+      renderItem();
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+}
+
+function deleteItem() {
+  const itemId = $(this).parent().data("id");
+
+  $.ajax({
+    type: "DELETE",
+    url: `/doItem/${itemId}`,
+  })
+    .then((response) => {
+      getItem();
     })
     .catch((err) => {
       console.warn(err);
@@ -52,7 +70,23 @@ function clearItem() {
 
 function renderItem() {
   $(".js-item-output").empty();
+
   for (let doItem of items) {
-    $(".js-item-output").append(`<li>${doItem.item_name}</li>`);
+    //     let completeItem = ``;
+    // if (doItem.complete === true) {
+    //     completeItem `<button></button>`
+    // }
+
+    $(".js-item-output").append(`
+    <div data-id=${doItem.id}>
+    <span>${doItem.item_name}</span>
+    <button class="js-btn-remove">Remove</button>
+    <button class="js-btn-complete">Complete</button>
+    </div>`);
+
+    if (doItem.complete === true) {
+      const $el = $(".js-item-output").children().last();
+      $el.addClass("completed");
+    }
   }
 }
