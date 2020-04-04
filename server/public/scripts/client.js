@@ -1,27 +1,28 @@
 $(document).ready(init);
 
+let items = [];
+
 function init() {
-  console.log("ToDo List Running");
   $("#js-submit-doItem").on("submit", submitItem);
+
+  getItems();
 }
 
 function submitItem(event) {
   event.preventDefault();
 
-  const doItemInput = $("#js-input-doItem").val();
+  const doItemInput = {
+    doItem: $("#js-input-doItem").val(),
+  };
 
   postDoItem(doItemInput);
 }
 
 function postDoItem(doItem) {
-  const dataForServer = {
-    doItem: doItem,
-  };
-
   $.ajax({
     type: "POST",
-    url: "/items",
-    data: dataForServer,
+    url: "/doItem",
+    data: doItem,
   })
     .then((response) => {
       getItems();
@@ -34,10 +35,11 @@ function postDoItem(doItem) {
 function getItems() {
   $.ajax({
     type: "GET",
-    url: "/items",
+    url: "/doItem",
   })
     .then((response) => {
-      console.log(response);
+      items = response;
+      renderItem(items);
     })
     .catch((err) => {
       console.warn(err);
@@ -46,4 +48,11 @@ function getItems() {
 
 function clearItem() {
   $("#js-input-doItem").val("");
+}
+
+function renderItem() {
+  $(".js-item-output").empty();
+  for (let doItem of items) {
+    $(".js-item-output").append(`<li>${doItem.item_name}</li>`);
+  }
 }

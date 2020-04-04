@@ -10,7 +10,7 @@ app.use(express.static("server/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/items", itemRouter);
+app.use("/doItem", itemRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
