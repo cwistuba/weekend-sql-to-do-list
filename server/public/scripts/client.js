@@ -22,7 +22,26 @@ function postDoItem(doItem) {
     type: "POST",
     url: "/items",
     data: dataForServer,
-  });
+  })
+    .then((response) => {
+      getItems();
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
+}
+
+function getItems() {
+  $.ajax({
+    type: "GET",
+    url: "/items",
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.warn(err);
+    });
 }
 
 function clearItem() {
