@@ -1,9 +1,5 @@
-# Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+# Weekend SQL To Do List
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+I created a 'TO DO' application. The front end experience allows a user to create a Task. When the Task is created, it is stored inside of the database (SQL). The front end will refresh to show all tasks that need to be completed. Each Task has an option to 'Complete' or 'Remove'. When a Task is complete, its visual representation is crossed out. This was accomplished in CSS and hooks into the logic to know whether or not the task is complete. When a Task is deleted, the Task is removed from both the front end as well as the Database.
