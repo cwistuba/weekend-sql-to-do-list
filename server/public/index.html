@@ -7,17 +7,35 @@
 
     <script src="vendors/jquery.min.js"></script>
     <script src="scripts/client.js"></script>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <h1>Prime To-Do List</h1>
-
-    <form id="js-submit-doItem">
-      <input id="js-input-doItem" type="text" placeholder="Create To-Do Item" />
-      <button>Create</button>
-    </form>
-
-    <div>
-      <ul class="js-item-output"></ul>
+    <header>
+      <h1>Prime To-Do List</h1>
+    </header>
+    <div class="input">
+      <form id="js-submit-doItem">
+        <input
+          id="js-input-doItem"
+          type="text"
+          placeholder="Create To-Do Item"
+        />
+        <button>Create</button>
+      </form>
     </div>
+
+    <table class="js-item-output">
+      <thead>
+          <div></div>
+          <tr>
+            <th>
+              Item
+            </th>
+            <th></th>
+            <th></th>
+          </tr>
+        </div>
+      </thead>
+    </table>
   </body>
 </html>

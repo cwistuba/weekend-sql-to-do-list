@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  const queryString = `SELECT * FROM "to do items"`;
+  const queryString = `SELECT * FROM "to do items" ORDER BY "id" DESC`;
 
   pool
     .query(queryString)
